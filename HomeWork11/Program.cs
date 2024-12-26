@@ -16,6 +16,10 @@ namespace HomeWork11
                 {
                     dir.Create();
                 }
+                else
+                {
+                    Console.WriteLine($"Directory {dirPath} already exists");
+                }
 
                 for (int i = 0; i < 10; i++)
                 {
@@ -25,12 +29,16 @@ namespace HomeWork11
                     {
                         using (var fs = File.Create(filePath))
                         {
-                            fs.Write(Encoding.UTF8.GetBytes(fileName+" "));
+                            fs.Write(Encoding.UTF8.GetBytes(fileName + " "));
                         }
                         if (Utils.CanWriteToFile(filePath))
                         {
                             File.AppendAllTextAsync(filePath, DateTime.Now.ToString());
                         }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"File {filePath} already exists");
                     }
 
                 }
@@ -46,10 +54,11 @@ namespace HomeWork11
                     if (File.Exists(filePath))
                     {
                         var Text = File.ReadAllText(filePath);
-                        Console.WriteLine(Text);
-                    }
+                        Console.WriteLine($"{fileName}: {Text}");
+                    };
                 }
             }
         }
     }
+
 }
